@@ -6,6 +6,7 @@ Created on Mon Apr  5 19:08:54 2021
 """
 
 import time
+import random
 
 
 # New Game Setup
@@ -24,7 +25,7 @@ def newGame():
 # Generaete a new guess which meets the rules
 def generateGuess(turnNumber,guessHistory, responseHistory):
     print(turnNumber,guessHistory,responseHistory)
-    colorList = ["A", "B", "C", "D","E"]
+    colorList = ["A", "B", "C", "D", "E", "F"]
     #First, iterate through possible answers
     viableGuesses = [] # list of viable guesses
     for position1 in colorList:
@@ -80,7 +81,7 @@ def generateGuess(turnNumber,guessHistory, responseHistory):
                     if guessResponseHistory == responseHistory:
                         #print("This is a good guess to make:", guessSequence)
                         viableGuesses.append(guessSequence)
-                        break
+                        #removed break statement here - think it was causing issues
     
     #print the final viable guess list:
     print("Guess Options:",viableGuesses)
@@ -107,8 +108,10 @@ for turnNumber in range(8):
     
     print("Number of options = ",len(viableGuesses))
     if len(viableGuesses)>0:
-        myGuess = viableGuesses[0]
-        print("My Guess Is:", myGuess)
+        #if there are any options left:
+            #pick a random option from the list and set it as your guess
+        myGuess = viableGuesses[random.randint(0,len(viableGuesses)-1)]
+        print("        My Guess Is:", myGuess)
         guessHistory.append(myGuess)
         print("(Secret Sequence is:", secretSequence)
         print("Number of Black:")
